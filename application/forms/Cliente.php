@@ -44,7 +44,7 @@ class Application_Form_Cliente extends Zend_Form
         // Add the submit button
         $this->addElement('submit', 'submit', array(
             'ignore'   => true,
-            'label'    => 'Cadastrar',
+            'label'    => 'Enviar',
         ));
  
 

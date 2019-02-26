@@ -31,6 +31,8 @@
         <ul>
             <?php
                 foreach($this->clientes as $cliente) {
+                    if(empty($cliente))
+                        continue;
             ?>
                 <li><?php echo $cliente->getNome() . " | " . $cliente->getEmail() ?> 
                     <a href="/cliente/view/?id=<?php echo $cliente->getId();?>">Visualizar</a> 

@@ -37,16 +37,39 @@ class Application_Model_Cliente
         return $this->_cpf;
     }
 
-    
 
+    public function save($data, $id=null){
 
-    public function save($model){
+        if(is_null($id)){
+
+        }
+        else{
+            $csv = new Application_Model_CSVCliente();            
+            $csv->editData(new Application_Model_Cliente($id, $data['nome'], $data['email'], $data['telefone'], $data['cpf'] ), $id);
+            return true;
+        }
 
     }
 
     public static function findById($id){
         $cliente = new Application_Model_CSVCliente();
         return $cliente->getDataById($id);
+    }
+
+    public static function findArrayById($id){
+        $array = array();
+        $csv = new Application_Model_CSVCliente();
+        
+        $c = $csv->getDataById($id);
+        if(empty($c))
+            return null;
+
+        $array['nome'] = $c->getNome();
+        $array['email'] = $c->getEmail();
+        $array['telefone'] = $c->getTelefone();
+        $array['cpf'] = $c->getCpf();
+
+        return $array;
     }
 
     public static function fetchAll(){
