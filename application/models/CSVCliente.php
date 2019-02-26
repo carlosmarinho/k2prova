@@ -61,7 +61,7 @@ class Application_Model_CSVCliente
 
     public function editCliente($cliente, $id){
         if($this->emailExists($id, $cliente->getEmail()))
-            throw new Exception("Email já cadastrado");
+            throw new Exception("Email " . $cliente->getEmail() . " já cadastrado");
 
         $mySession = new Zend_Session_Namespace('mySession');
         $this->_data[$id] = $cliente;

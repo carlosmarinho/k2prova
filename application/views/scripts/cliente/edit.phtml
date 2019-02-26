@@ -21,13 +21,25 @@
     {
         min-height: 50%;
     }
+
+    .success {
+        color: blue;
+        font-size: 18px;
+    }
+
+    .error{
+        color: red;
+        font-size: 18px;
+    }
+
 </style>
 <div id="welcome">
     <h1>Edição de Usuário</h1>
     <hr/>
     <br />
     <div id="more-information">
-        <span><?php echo $this->mensagem;?></span>
+        <span class="success"><?php echo $this->mensagem;?></span>
+        <span class="error"><?php echo $this->errorMensagem;?></span>
         <?php echo $this->form; ?>
 
     </div>

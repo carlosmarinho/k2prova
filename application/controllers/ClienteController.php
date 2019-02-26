@@ -30,9 +30,16 @@ class ClienteController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $cliente = new Application_Model_Cliente();
-                $cliente->save($form->getValues());
                 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
-                $flashMessenger->addMessage('Usuário adicionado com sucesso!');
+                try{
+                    $cliente->save($form->getValues());
+                    $flashMessenger->addMessage('Usuário adicionado com sucesso!');
+                }
+                catch(Exception $e){
+                    print_r($e);
+                    die();
+                    $flashMessenger->addMessage($e->getMessage());
+                }
                 return $this->_helper->redirector('index');
             }
         }
@@ -51,8 +58,13 @@ class ClienteController extends Zend_Controller_Action
 
             if ($form->isValid($request->getPost())) {
                 $cliente = new Application_Model_Cliente();
-                if($cliente->save($form->getValues(), $id))
-                    $this->view->mensagem = "Cliente editado com sucesso!";
+                try{
+                    if($cliente->save($form->getValues(), $id))
+                        $this->view->mensagem = "Cliente editado com sucesso!";
+                }
+                catch(Exception $e){
+                    $this->view->errorMensagem = $e->getMessage();
+                }
             }
         }
 
