@@ -9,7 +9,7 @@ class Application_Form_Cliente extends Zend_Form
         // Set the method for the display form to POST
         $this->setMethod('post');
 
-        // Add an email element
+        // Add an nome element
         $this->addElement('text', 'nome', array(
             'label'      => 'Nome:',
             'required'   => true,
@@ -25,6 +25,21 @@ class Application_Form_Cliente extends Zend_Form
                 'EmailAddress',
             )
         ));
+
+        // Add an telefone element
+        $this->addElement('text', 'telefone', array(
+            'label'      => 'Telefone:',
+            'required'   => false,
+            'filters'    => array('StringTrim'),
+        ));
+
+        // Add an cpf element
+        $this->addElement('text', 'cpf', array(
+            'label'      => 'CPF:',
+            'required'   => true,
+            'filters'    => array('StringTrim'),
+        ));
+
 
         // Add the submit button
         $this->addElement('submit', 'submit', array(
