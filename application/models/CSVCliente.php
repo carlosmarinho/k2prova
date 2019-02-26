@@ -44,9 +44,15 @@ class Application_Model_CSVCliente
     }
 
     public function updateCsv(){
-        $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv", w);
-        //Poderia usar o fputcsv porém só iria funcionar com a versão do php > 5.4.0
-        
+        $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv", 'w');
+        $str_header = "id,nome,email,telefone,cpf\r\n";
+        $file->fwrite($str_header);
+        foreach($this->_data as $cliente){
+            $str_csv = $cliente->getId() . "," . $cliente->getNome() . "," . $cliente->getEmail() . 
+            $cliente->getTelefone() . "," . $cliente->getCpf() . "\r\n";
+            //Poderia usar o fputcsv porém só iria funcionar com a versão do php > 5.4.0
+            $file->fwrite($str_csv);
+        }
 
     }
 
