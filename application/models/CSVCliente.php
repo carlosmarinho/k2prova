@@ -38,6 +38,12 @@ class Application_Model_CSVCliente
     }
 
     public function createCliente($data){
+        if($this->emailExists($id, $data['email']))
+            throw new Exception("Email " . $data['email'] . " já está cadastrado!");
+
+        if($this->cpfExists($id, $data['email']))
+            throw new Exception("CPF " . $data['cpf'] . " já está cadastrado!");
+
         $mySession = new Zend_Session_Namespace('mySession');
 
         $id = sizeof($this->_data)+1;
@@ -62,6 +68,9 @@ class Application_Model_CSVCliente
     public function editCliente($cliente, $id){
         if($this->emailExists($id, $cliente->getEmail()))
             throw new Exception("Email " . $cliente->getEmail() . " já cadastrado");
+        
+        if($this->cpfExists($id, $cliente->getCpf()))
+            throw new Exception("CPF " . $cliente->getCpf() . " já está cadastrado!");
 
         $mySession = new Zend_Session_Namespace('mySession');
         $this->_data[$id] = $cliente;
@@ -83,6 +92,18 @@ class Application_Model_CSVCliente
             if($cliente->getId() == $id )
                 continue;
             if($cliente->getEmail() == $email)
+                return true;
+        }
+
+        return false;
+    }
+
+    public function cpfExists($id, $cpf){
+        
+        foreach($this->_data as $cliente){
+            if($cliente->getId() == $id )
+                continue;
+            if($cliente->getCpf() == $cpf)
                 return true;
         }
 
