@@ -22,5 +22,17 @@ class ClienteController extends Zend_Controller_Action
         $this->view->cliente = $cliente;
     }
 
+    public function newAction(){
+        //$cliente = new Application_Model_Cliente();
+    }
+
+    public function editAction(){
+        //$cliente = new Application_Model_Cliente();
+    }
+
+    public function deleteAction(){
+        //$cliente = new Application_Model_Cliente();
+    }
+
 }
 
