@@ -23,7 +23,18 @@ class ClienteController extends Zend_Controller_Action
     }
 
     public function newAction(){
+        $request = $this->getRequest();
         $form    = new Application_Form_Cliente();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                print_r($form->getValues());
+                $cliente = new Application_Model_Cliente();
+                //$cliente->save($cliente);
+                //return $this->_helper->redirector('index');
+            }
+        }
+
         $this->view->form = $form;
     }
 
