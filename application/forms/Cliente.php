@@ -32,6 +32,12 @@ class Application_Form_Cliente extends Zend_Form
             'label'    => 'Cadastrar',
         ));
  
+
+        // And finally add some CSRF protection
+        $this->addElement('hash', 'csrf', array(
+            'ignore' => true,
+        ));
+
     }
 
 
