@@ -1,0 +1,44 @@
+<style>
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    div#more-information
+    {
+        min-height: 50%;
+    }
+
+    .success {
+        color: blue;
+        font-size: 25px;
+    }
+
+    .error{
+        color: red;
+        font-size: 18px;
+    }
+
+</style>
+<div id="welcome">
+    <h1>Liberar Arquivo para Uso</h1>
+    <hr/>
+    <br />
+    <div id="more-information">
+        <span class="success">ARQUIVO LIBERADO COM SUCESSO </span>
+    </div>
+    <?php echo $this->render('menu.phtml'); ?>
+</div>

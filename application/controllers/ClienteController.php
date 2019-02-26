@@ -6,6 +6,8 @@ class ClienteController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        $mySession = new Zend_Session_Namespace('mySession');
+        $this->view->readOnly = $mySession->readOnly;
     }
 
     public function indexAction()
@@ -16,6 +18,7 @@ class ClienteController extends Zend_Controller_Action
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 
         $this->view->flashmsgs = $flashMessenger->getMessages();
+        
     }
 
     public function viewAction(){
@@ -81,6 +84,12 @@ class ClienteController extends Zend_Controller_Action
         $id = $this->_request->getQuery('id');
         $cliente = Application_Model_Cliente::findById($id);
         $this->view->cliente = $cliente;
+    }
+
+    public function unlockfileAction(){
+        $csv = new Application_Model_CSVCliente();
+        $csv->unlockFile();
+        Zend_Session::destroy( true );
     }
 
     public function confirmaDeleteAction(){

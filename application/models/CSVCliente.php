@@ -15,15 +15,30 @@ class Application_Model_CSVCliente
         else{
             $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv");
             $file->setFlags(SplFileObject::READ_CSV);
-            $it = new LimitIterator($file, 1);
-            foreach ($it as $row) {
-                list($id, $nome, $email, $telefone, $cpf) = $row;
-    
+            //$it = new LimitIterator($file, 1);
+            //foreach ($it as $row) {
+            
+            foreach ($file as $ind => $row) {
+                if($ind == 0){
+                    if(strstr($row[0],'***locked-file***')){
+                        $mySession->readOnly = true;
+                    }
+                    else{
+                        $mySession->readOnly = false;
+                    }
+                    continue;
+                }
                 
-                $cliente = new Application_Model_Cliente($id, $nome, $email, $telefone, $cpf); 
-                $this->_data[$id] = $cliente;
+            
+                list($id, $nome, $email, $telefone, $cpf) = $row;
+                if(!empty($id)){
+                    $cliente = new Application_Model_Cliente($id, $nome, $email, $telefone, $cpf); 
+                    $this->_data[$id] = $cliente;
+                }
             }
 
+print_r("locked: " . $mySession->readOnly);
+            $this->updateCsv(true);
             $mySession->clientes = $this->_data;
         }
 
@@ -110,11 +125,23 @@ class Application_Model_CSVCliente
         return false;
     }
 
-    public function updateCsv(){
+    public function unlockFile(){
+        $this->updateCsv(false);
+    }
+
+    public function updateCsv($lock=true){
         $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv", 'w');
-        $str_header = "id,nome,email,telefone,cpf\r\n";
+        $str_header = "";
+        if($lock)
+            $str_header = "***locked-file***";
+        $str_header .= "id,nome,email,telefone,cpf\r\n";
+
         $file->fwrite($str_header);
+
+
         foreach($this->_data as $cliente){
+            if(empty($cliente->getId()))
+                continue;
             $str_csv = $cliente->getId() . "," . $cliente->getNome() . "," . $cliente->getEmail() . "," .
             $cliente->getTelefone() . "," . $cliente->getCpf() . "\r\n";
             //Poderia usar o fputcsv porém só iria funcionar com a versão do php > 5.4.0

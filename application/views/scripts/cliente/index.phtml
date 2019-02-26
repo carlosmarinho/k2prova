@@ -5,7 +5,7 @@
         color: #0398CA;
     }
 
-    span#zf-name
+    span
     {
         color: #91BE3F;
     }
@@ -30,7 +30,11 @@
 
 </style>
 <div id="welcome">
-    <h2>Listagem de Clientes</h2>
+    <h2>Listagem de Clientes
+    <?php if($this->readOnly) { ?>
+        <span> * Modo de Leitura </span>
+    <?php } ?>
+    </h2>
     <hr/>
     <div id="more-information">
         
@@ -44,8 +48,10 @@
             ?>
                 <li><?php echo $cliente->getNome() . " | " . $cliente->getEmail() ?> 
                     <a href="/cliente/view/?id=<?php echo $cliente->getId();?>">Visualizar</a> 
-                    <a href="/cliente/edit/?id=<?php echo $cliente->getId();?>">Editar</a> 
-                    <a href="/cliente/delete/?id=<?php echo $cliente->getId();?>">Excluir</a>  
+                    <?php if(!$this->readOnly) { ?>
+                        <a href="/cliente/edit/?id=<?php echo $cliente->getId();?>">Editar</a> 
+                        <a href="/cliente/delete/?id=<?php echo $cliente->getId();?>">Excluir</a>
+                    <?php } ?>
                 </li>
             <?php
                 }
