@@ -2,6 +2,10 @@
 
 class Application_Form_Cliente extends Zend_Form
 {
+    public function validateCpf(){
+
+    }
+
 
     public function init()
     {
@@ -37,9 +41,10 @@ class Application_Form_Cliente extends Zend_Form
         $this->addElement('text', 'cpf', array(
             'label'      => 'CPF:',
             'required'   => true,
-            'filters'    => array('StringTrim'),
+            'filters'    => array('StringTrim')
         ));
 
+        
 
         // Add the submit button
         $this->addElement('submit', 'submit', array(

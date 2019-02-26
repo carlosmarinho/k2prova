@@ -47,6 +47,7 @@ class Application_Model_Cliente
             return true;
         }
         else{
+            
             $csv->editCliente(
                 new Application_Model_Cliente($id, $data['nome'], 
                     $data['email'], 

@@ -16,12 +16,9 @@ class ClienteController extends Zend_Controller_Action
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 
         $this->view->flashmsgs = $flashMessenger->getMessages();
-        
-        // action body
     }
 
     public function viewAction(){
-        //$cliente = new Application_Model_Cliente();
         $cliente = Application_Model_Cliente::findById($this->_request->getQuery('id'));
         $this->view->cliente = $cliente;
     }
@@ -76,7 +73,8 @@ class ClienteController extends Zend_Controller_Action
 
     public function confirmaDeleteAction(){
         $id = $this->_request->getQuery('id');
-        $cliente = Application_Model_Cliente::delete($id);
+        $cliente = Application_Model_Cliente::findById($id);
+        Application_Model_Cliente::delete($id);
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $flashMessenger->addMessage('Usuário \'' . $cliente->getNome() . '\' excluido com sucesso!');
         return $this->_helper->redirector('index');

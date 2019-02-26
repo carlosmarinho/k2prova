@@ -3,6 +3,7 @@
 class Application_Model_CSVCliente
 {
     protected $_data = array();
+    
 
     public function __construct(){
 
@@ -59,17 +60,33 @@ class Application_Model_CSVCliente
     
 
     public function editCliente($cliente, $id){
+        if($this->emailExists($id, $cliente->getEmail()))
+            throw new Exception("Email já cadastrado");
+
         $mySession = new Zend_Session_Namespace('mySession');
         $this->_data[$id] = $cliente;
         $this->updateCsv();
         $mySession->clientes = $this->_data;
     }
 
+
     public function deleteCliente($id){
         $mySession = new Zend_Session_Namespace('mySession');
         unset($this->_data[$id]);
         $this->updateCsv();
         $mySession->clientes = $this->_data;
+    }
+
+    public function emailExists($id, $email){
+        
+        foreach($this->_data as $cliente){
+            if($cliente->getId() == $id )
+                continue;
+            if($cliente->getEmail() == $email)
+                return true;
+        }
+
+        return false;
     }
 
     public function updateCsv(){
