@@ -1,14 +1,39 @@
-<h2>Visualização de dados do cliente</h2>
-<hr/>
-<?php /*poderia ter usada a short tag <?=?>, porém não é considerada mais uma boa prática de programação*/ ?>
-<p><strong>Nome:</strong> <?php echo $this->cliente->getNome();?></p>
-<p><strong>Email:</strong> <?php echo $this->cliente->getEmail();?></p>
-<p><strong>Telefone:</strong> <?php echo $this->cliente->getTelefone();?></p>
-<p><strong>CPF:</strong> <?php echo $this->cliente->getCpf();?></p>
-<br>
-<hr/>
-<br />
-<ul style="text-align:center">
-    <li><a href="/">Home</a></li>
-    <li><a href="/cliente">Listagem de Clientes</a></li>
-</ul>
+<style>
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    div#more-information
+    {
+        min-height: 50%;
+    }
+</style>
+<div id="welcome">
+    <h1>Visualização de dados do cliente</h1>
+    <hr/>
+    <br />
+    <div id="more-information">
+
+        <?php /*poderia ter usada a short tag <?=?>, porém não é considerada mais uma boa prática de programação*/ ?>
+        <p><strong>Nome:</strong> <?php echo $this->cliente->getNome();?></p>
+        <p><strong>Email:</strong> <?php echo $this->cliente->getEmail();?></p>
+        <p><strong>Telefone:</strong> <?php echo $this->cliente->getTelefone();?></p>
+        <p><strong>CPF:</strong> <?php echo $this->cliente->getCpf();?></p>
+        <br>
+    </div>
+    <?php echo $this->render('menu.phtml'); ?>
+</div>

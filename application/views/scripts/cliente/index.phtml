@@ -1,13 +1,44 @@
-<h2>Listagem de Clientes</h2>
-<hr/>
-<ul>
-    <?php
-        foreach($this->clientes as $cliente) {
-    ?>
-        <li><?php echo $cliente->getNome() . " | " . $cliente->getEmail() ?> 
-            <a href="/cliente/view/?id=<?php echo $cliente->getId();?>">Visualizar</a> <a href="">Editar</a> <a href="">Excluir</a>  
-        </li>
-    <?php
-        }
-    ?>
-</ul>
+<style>
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    div#more-information
+    {
+        height: 50%;
+        margin-top: 50px;
+    }
+</style>
+<div id="welcome">
+    <h2>Listagem de Clientes</h2>
+    <hr/>
+    <div id="more-information">
+
+        <ul>
+            <?php
+                foreach($this->clientes as $cliente) {
+            ?>
+                <li><?php echo $cliente->getNome() . " | " . $cliente->getEmail() ?> 
+                    <a href="/cliente/view/?id=<?php echo $cliente->getId();?>">Visualizar</a> <a href="">Editar</a> <a href="">Excluir</a>  
+                </li>
+            <?php
+                }
+            ?>
+        </ul>
+    </div>
+    <?php echo $this->render('menu.phtml'); ?>
+</div>
