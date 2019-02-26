@@ -12,7 +12,8 @@ class ClienteController extends Zend_Controller_Action
     {
 
         //$cliente = new Application_Model_Cliente();
-        Application_Model_Cliente::fetchAll();
+        $clientes = Application_Model_Cliente::fetchAll();
+        $this->view->clientes = $clientes;
         
         // action body
     }
