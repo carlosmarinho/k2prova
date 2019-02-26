@@ -12,14 +12,8 @@ class ClienteController extends Zend_Controller_Action
     {
 
         $cliente = new Application_Model_Cliente();
-
-        print_r($cliente);
-        $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv");
-        $file->setFlags(SplFileObject::READ_CSV);
-        foreach ($file as $row) {
-            list($animal, $class, $legs) = $row;
-            printf("A %s is a %s with %d legs\n", $animal, $class, $legs);
-        }
+        $cliente->fetchAll();
+        
         // action body
     }
 

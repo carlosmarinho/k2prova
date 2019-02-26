@@ -17,6 +17,7 @@
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
         <modelFile modelName="Cliente"/>
+        <modelFile modelName="CSVCliente"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>

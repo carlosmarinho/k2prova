@@ -9,6 +9,12 @@ class Application_Model_Cliente
     protected $_telefone;
     protected $_cpf;
 
+
+    public function __construct($id, $nome, $email, $telefone, $cpf){
+
+    }
+
+
     public function save($model){
 
     }
@@ -18,7 +24,10 @@ class Application_Model_Cliente
     }
 
     public function fetchAll(){
+        $cliente = new Application_Model_CSVCliente();
+        $data = $cliente->getData();
 
+        print_r($data);
     }
 
 }
