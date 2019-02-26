@@ -10,6 +10,10 @@ class ClienteController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+        $cliente = new Application_Model_Cliente();
+
+        print_r($cliente);
         $file = new SplFileObject(APPLICATION_PATH . "/data/base.csv");
         $file->setFlags(SplFileObject::READ_CSV);
         foreach ($file as $row) {
