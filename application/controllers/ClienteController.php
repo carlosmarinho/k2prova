@@ -11,8 +11,8 @@ class ClienteController extends Zend_Controller_Action
     public function indexAction()
     {
 
-        $cliente = new Application_Model_Cliente();
-        $cliente->fetchAll();
+        //$cliente = new Application_Model_Cliente();
+        Application_Model_Cliente::fetchAll();
         
         // action body
     }
