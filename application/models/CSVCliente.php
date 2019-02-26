@@ -30,14 +30,13 @@ class Application_Model_CSVCliente
                 }
                 
             
-                list($id, $nome, $email, $telefone, $cpf) = $row;
-                if(!empty($id)){
+                if(!empty($row[0])){
+                    list($id, $nome, $email, $telefone, $cpf) = $row;
                     $cliente = new Application_Model_Cliente($id, $nome, $email, $telefone, $cpf); 
                     $this->_data[$id] = $cliente;
                 }
             }
 
-print_r("locked: " . $mySession->readOnly);
             $this->updateCsv(true);
             $mySession->clientes = $this->_data;
         }
