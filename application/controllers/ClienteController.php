@@ -12,6 +12,10 @@ class ClienteController extends Zend_Controller_Action
     {
         $clientes = Application_Model_Cliente::fetchAll();
         $this->view->clientes = $clientes;
+
+        $flashMessenger = $this->_helper->getHelper('FlashMessenger');
+
+        $this->view->flashmsgs = $flashMessenger->getMessages();
         
         // action body
     }
@@ -28,10 +32,11 @@ class ClienteController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                print_r($form->getValues());
                 $cliente = new Application_Model_Cliente();
-                //$cliente->save($cliente);
-                //return $this->_helper->redirector('index');
+                $cliente->save($form->getValues());
+                $flashMessenger = $this->_helper->getHelper('FlashMessenger');
+                $flashMessenger->addMessage('Usuário adicionado com sucesso!');
+                return $this->_helper->redirector('index');
             }
         }
 
@@ -51,7 +56,6 @@ class ClienteController extends Zend_Controller_Action
                 $cliente = new Application_Model_Cliente();
                 if($cliente->save($form->getValues(), $id))
                     $this->view->mensagem = "Cliente editado com sucesso!";
-                //return $this->_helper->redirector('index');
             }
         }
 
@@ -65,7 +69,17 @@ class ClienteController extends Zend_Controller_Action
     }
 
     public function deleteAction(){
-        //$cliente = new Application_Model_Cliente();
+        $id = $this->_request->getQuery('id');
+        $cliente = Application_Model_Cliente::findById($id);
+        $this->view->cliente = $cliente;
+    }
+
+    public function confirmaDeleteAction(){
+        $id = $this->_request->getQuery('id');
+        $cliente = Application_Model_Cliente::delete($id);
+        $flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $flashMessenger->addMessage('Usuário \'' . $cliente->getNome() . '\' excluido com sucesso!');
+        return $this->_helper->redirector('index');
     }
 
 }

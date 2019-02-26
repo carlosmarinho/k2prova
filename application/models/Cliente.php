@@ -40,20 +40,34 @@ class Application_Model_Cliente
 
     public function save($data, $id=null){
 
+        $csv = new Application_Model_CSVCliente();            
         if(is_null($id)){
 
+            $csv->createCliente($data);
+            return true;
         }
         else{
-            $csv = new Application_Model_CSVCliente();            
-            $csv->editData(new Application_Model_Cliente($id, $data['nome'], $data['email'], $data['telefone'], $data['cpf'] ), $id);
+            $csv->editCliente(
+                new Application_Model_Cliente($id, $data['nome'], 
+                    $data['email'], 
+                    $data['telefone'], 
+                    $data['cpf'] 
+                ), 
+                $id
+            );
             return true;
         }
 
     }
 
     public static function findById($id){
-        $cliente = new Application_Model_CSVCliente();
-        return $cliente->getDataById($id);
+        $csv = new Application_Model_CSVCliente();
+        return $csv->getDataById($id);
+    }
+
+    public static function delete($id){
+        $csv = new Application_Model_CSVCliente();
+        return $csv->deleteCliente($id);
     }
 
     public static function findArrayById($id){

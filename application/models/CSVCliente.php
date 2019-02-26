@@ -36,9 +36,38 @@ class Application_Model_CSVCliente
         return $this->_data[$id];
     }
 
-    public function editData($cliente, $id){
+    public function createCliente($data){
+        $mySession = new Zend_Session_Namespace('mySession');
+
+        $id = sizeof($this->_data)+1;
+
+        if(array_key_exists($id, $this->_data))
+            $id++;
+
+        $cliente = new Application_Model_Cliente( $id , $data['nome'], 
+            $data['email'], 
+            $data['telefone'], 
+            $data['cpf'] 
+        );
+
+        $this->_data[$id] = $cliente; 
+
+        $this->updateCsv();
+        $mySession->clientes = $this->_data;
+    }
+
+    
+
+    public function editCliente($cliente, $id){
         $mySession = new Zend_Session_Namespace('mySession');
         $this->_data[$id] = $cliente;
+        $this->updateCsv();
+        $mySession->clientes = $this->_data;
+    }
+
+    public function deleteCliente($id){
+        $mySession = new Zend_Session_Namespace('mySession');
+        unset($this->_data[$id]);
         $this->updateCsv();
         $mySession->clientes = $this->_data;
     }
@@ -48,7 +77,7 @@ class Application_Model_CSVCliente
         $str_header = "id,nome,email,telefone,cpf\r\n";
         $file->fwrite($str_header);
         foreach($this->_data as $cliente){
-            $str_csv = $cliente->getId() . "," . $cliente->getNome() . "," . $cliente->getEmail() . 
+            $str_csv = $cliente->getId() . "," . $cliente->getNome() . "," . $cliente->getEmail() . "," .
             $cliente->getTelefone() . "," . $cliente->getCpf() . "\r\n";
             //Poderia usar o fputcsv porém só iria funcionar com a versão do php > 5.4.0
             $file->fwrite($str_csv);

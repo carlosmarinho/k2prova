@@ -1,0 +1,36 @@
+<style>
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    div#more-information
+    {
+        min-height: 50%;
+    }
+</style>
+<div id="welcome">
+    <h1>Exclusão de Usuário</h1>
+    <hr/>
+    <br />
+    <div id="more-information">
+        <h2>Tem certeza que deseja excluir o cliente <?php echo $this->cliente->getNome(); ?>?</h2>
+        <br /><br />
+        <a href="/cliente/confirma-delete/?id=<?php echo $this->cliente->getId();?>"><button>Confirmar Exclusão</button></a>
+        <a href="/cliente"><button>Cancelar Exclusão</button></a>
+    </div>
+    <?php echo $this->render('menu.phtml'); ?>
+</div>

@@ -22,11 +22,19 @@
         height: 50%;
         margin-top: 50px;
     }
+
+    #more-information span{
+        color: blue;
+        font-size: 18px;
+    }
+
 </style>
 <div id="welcome">
     <h2>Listagem de Clientes</h2>
     <hr/>
     <div id="more-information">
+        
+        <span><?php echo ($this->flashmsgs)? $this->flashmsgs[0]:'';?></span>
 
         <ul>
             <?php
