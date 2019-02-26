@@ -10,14 +10,17 @@ class ClienteController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
-        //$cliente = new Application_Model_Cliente();
         $clientes = Application_Model_Cliente::fetchAll();
         $this->view->clientes = $clientes;
         
         // action body
     }
 
+    public function viewAction(){
+        //$cliente = new Application_Model_Cliente();
+        $cliente = Application_Model_Cliente::findById($this->_request->getQuery('id'));
+        $this->view->cliente = $cliente;
+    }
 
 }
 

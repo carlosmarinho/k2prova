@@ -9,6 +9,18 @@ class Application_Model_Cliente
     protected $_telefone;
     protected $_cpf;
 
+    public function __construct($id=null, $nome=null, $email=null, $telefone=null, $cpf=null){
+        $this->_id = $id;
+        $this->_nome = $nome;
+        $this->_email = $email;
+        $this->_telefone = $telefone;
+        $this->_cpf = $cpf;
+    }
+
+    public function getId(){
+        return $this->_id;
+    }
+
     public function getNome(){
         return $this->_nome;
     }
@@ -25,21 +37,16 @@ class Application_Model_Cliente
         return $this->_cpf;
     }
 
-    public function __construct($id, $nome, $email, $telefone, $cpf){
-        $this->_id = $id;
-        $this->_nome = $nome;
-        $this->_email = $email;
-        $this->_telefone = $telefone;
-        $this->_cpf = $cpf;
-    }
+    
 
 
     public function save($model){
 
     }
 
-    public function find($id, $model){
-
+    public static function findById($id){
+        $cliente = new Application_Model_CSVCliente();
+        return $cliente->getDataById($id);
     }
 
     public static function fetchAll(){

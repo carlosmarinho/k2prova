@@ -1,12 +1,11 @@
 <h2>Listagem de Clientes</h2>
 <hr/>
-<?php print_r($this->clientes); ?>
 <ul>
     <?php
         foreach($this->clientes as $cliente) {
     ?>
         <li><?php echo $cliente->getNome() . " | " . $cliente->getEmail() ?> 
-            <a href="">Visualizar</a> <a href="">Editar</a> <a href="">Excluir</a>  
+            <a href="/cliente/view/?id=<?php echo $cliente->getId();?>">Visualizar</a> <a href="">Editar</a> <a href="">Excluir</a>  
         </li>
     <?php
         }
